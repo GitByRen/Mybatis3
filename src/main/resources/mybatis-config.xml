@@ -19,6 +19,11 @@
 	 -->
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		
+		<!-- 开启懒加载 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
 	</settings>
 	
 	<!-- 3.typeAliases：别名处理器，可以为我们的java类型起别名，别名不区分大小写 -->

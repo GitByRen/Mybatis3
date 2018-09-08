@@ -2,6 +2,9 @@ package com.important.HelloWorld.test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -9,9 +12,12 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
+import com.important.HelloWorld.bean.Department;
 import com.important.HelloWorld.bean.Employee;
+import com.important.HelloWorld.dao.DepartmentMapper;
 import com.important.HelloWorld.dao.EmployeeMapper;
 import com.important.HelloWorld.dao.EmployeeMapperAnnotation;
+import com.important.HelloWorld.dao.EmployeeMapperPlus;
 
 /**
  * 1.SqlSession是非线程安全的，每次使用都应该获取新的对象
@@ -106,4 +112,97 @@ public class MyBatisTest {
 			openSession.close();
 		}
 	}
+	
+	/**
+	 * 4.处理单个参数，多个参数
+	 */
+	@Test
+	public void test4() throws IOException {
+		SqlSessionFactory sessionFactory = getSessionFactory();
+		SqlSession openSession = sessionFactory.openSession();
+		try {
+			EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+			//Employee employee = mapper.getEmpByIdAndLastName(3, "jerry");
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("id", 3);
+			map.put("lastName", "Jerry");
+			map.put("tableName", "tbl_employee");
+			Employee employee = mapper.getEmpByMap(map);
+			System.out.println(employee);
+		} finally {
+			openSession.close();
+		}
+	}
+	
+	/**
+	 * 5.测试返回类型为List<Employee>、Map、Map<Integer, Employee>
+	 */
+	@Test
+	public void test5() throws IOException {
+		SqlSessionFactory sessionFactory = getSessionFactory();
+		SqlSession openSession = sessionFactory.openSession();
+		try {
+			EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+			List<Employee> employee = mapper.getEmpsByLastNameLike("%e%");
+			System.out.println(employee);
+			
+			Map<String, Object> returnMap = mapper.getEmpByIdReturnMap(1);
+			System.out.println(returnMap);
+			
+			Map<Integer, Employee> likeReturnMap = mapper.getEmpByLastNameLikeReturnMap("%r%");
+			System.out.println(likeReturnMap);
+		} finally {
+			openSession.close();
+		}
+	}
+	
+	/**
+	 * 6.测试ResultMap,association
+	 */
+	@Test
+	public void test6() throws IOException {
+		SqlSessionFactory sessionFactory = getSessionFactory();
+		SqlSession openSession = sessionFactory.openSession();
+		try {
+			EmployeeMapperPlus mapper = openSession.getMapper(EmployeeMapperPlus.class);
+			Employee empById = mapper.getEmpById(1);
+			System.out.println(empById);
+			
+			Employee empAndDept = mapper.getEmpAndDept(3);
+			System.out.println(empAndDept);
+			System.out.println(empAndDept.getDept());
+			
+			Employee empByIdStep = mapper.getEmpByIdStep(1);
+			System.out.println(empByIdStep);
+			System.out.println(empByIdStep.getDept());
+		} finally {
+			openSession.close();
+		}
+	}
+	
+	
+	/**
+	 * 7.测试collection
+	 */
+	@Test
+	public void test7() throws IOException {
+		SqlSessionFactory sessionFactory = getSessionFactory();
+		SqlSession openSession = sessionFactory.openSession();
+		try {
+			DepartmentMapper mapper = openSession.getMapper(DepartmentMapper.class);
+			
+			Department deptByIdPlus = mapper.getDeptByIdPlus(1);
+			System.out.println(deptByIdPlus);
+			System.out.println(deptByIdPlus.getEmps());
+			
+			// 分步查询
+			Department deptByIdStep = mapper.getDeptByIdStep(2);
+			System.out.println(deptByIdStep);
+			System.out.println(deptByIdStep.getEmps());
+		} finally {
+			openSession.close();
+		}
+	}
+	
 }
