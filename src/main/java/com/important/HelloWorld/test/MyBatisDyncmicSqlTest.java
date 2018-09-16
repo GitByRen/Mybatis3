@@ -16,7 +16,7 @@ import com.important.HelloWorld.bean.Department;
 import com.important.HelloWorld.bean.Employee;
 import com.important.HelloWorld.dao.EmployeeMapperDynamicSql;
 
-public class MyBatisTest1 {
+public class MyBatisDyncmicSqlTest {
 
 	public SqlSessionFactory getSessionFactory() throws IOException {
 		String resources = "mybatis-config.xml";

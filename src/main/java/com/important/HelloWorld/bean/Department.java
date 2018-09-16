@@ -1,8 +1,12 @@
 package com.important.HelloWorld.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Department {
+public class Department implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
 	private String departmentName;
 	private List<Employee> emps;
