@@ -4,6 +4,7 @@
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <!-- window->preferences->XML->XMLCatalog->Add->URI添加dtd约束 -->
 <configuration>
+	
 	<!-- 
 		1.properties：了解即可，与spring整合时使用spring来引入外部文件
 		mybatis可以使用properties来引入外部properties配置文件的内容
@@ -43,6 +44,15 @@
 		
 		<!-- 批量起别名的情况下也可以使用@Alias注解为某个类指定新的别名 -->
 	</typeAliases>
+	
+	
+	<plugins>
+		<plugin interceptor="com.important.plugin.plugin.MyFirstPlugin">
+			<property name="username" value="root"/>
+			<property name="password" value="root"/>
+		</plugin>
+	</plugins>
+	
 	
 	<!-- 
 		4.environments：mybatis可以配置多种环境，default可以指定使用某种环境.
@@ -101,5 +111,6 @@
 		 
 		 <!-- 批量注册 -->
 		<package name="com.important.HelloWorld.dao"/>
+		<package name="com.important.mbg.dao"/>
 	</mappers>
 </configuration>
