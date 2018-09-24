@@ -9,18 +9,29 @@
 
 	<properties>
 		<com.important.mysql>5.1.46</com.important.mysql>
-		<com.important.mybatis>3.4.1</com.important.mybatis>
 		<com.important.log4j>1.2.17</com.important.log4j>
 		<com.important.junit>4.12</com.important.junit>
 		<com.important.mbg>1.3.7</com.important.mbg>
+		<com.important.c3p0>0.9.5.2</com.important.c3p0>
+		<com.important.spring-core>4.3.10.RELEASE</com.important.spring-core>
 	</properties>
 
 	<dependencies>
+		<!-- mp依赖
+  			 mybatisPlus 会自动的维护Mybatis 以及MyBatis-spring相关的依赖
+  		 -->
 		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>${com.important.mybatis}</version>
+		    <groupId>com.baomidou</groupId>
+		    <artifactId>mybatis-plus</artifactId>
+		    <version>2.3</version>
 		</dependency>
+		<!-- c3p0 -->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>${com.important.c3p0}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -37,16 +48,17 @@
 			<version>${com.important.junit}</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- spring -->
 		<dependency>
-			<groupId>org.mybatis.generator</groupId>
-			<artifactId>mybatis-generator-core</artifactId>
-			<version>${com.important.mbg}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${com.important.spring-core}</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.mybatis.generator</groupId>
-			<artifactId>mybatis-generator-maven-plugin</artifactId>
-			<version>${com.important.mbg}</version>
-		</dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${com.important.spring-core}</version>
+		</dependency>
 	</dependencies>
 
 </project>
