@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.important.mp1.beans.Employee;
 import com.important.mp1.mapper.EmployeeMapper;
 
-public class TestMp1 {
+public class TestSimpleCrud {
 
 	private ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
 
@@ -104,6 +104,7 @@ public class TestMp1 {
 		employee.setAge(11);
 		employee.setSalary(201.21);
 		// insert:会根据实体类的每个属性进行非空判断，只有非空的属性才会出现在sql语句中
+		// (例如：如果没有setAge，则insert语句没有age字段)
 		Integer result = employeeMapper.insert(employee);
 		System.out.println("result:" + result);
 

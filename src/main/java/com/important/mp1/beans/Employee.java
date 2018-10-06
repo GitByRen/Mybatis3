@@ -1,10 +1,15 @@
 package com.important.mp1.beans;
 
+import java.io.Serializable;
+
+import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 
 @TableName(value = "tbl_employee")
-public class Employee {
+public class Employee extends Model<Employee>{
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @TableId
@@ -75,6 +80,14 @@ public class Employee {
 	public String toString() {
 		return "Employee [id=" + id + ", lastName=" + lastName + ", email=" + email + ", gender=" + gender + ", age="
 				+ age + "]";
+	}
+
+	/**
+	 * 返回主键
+	 */
+	@Override
+	protected Serializable pkVal() {
+		return id;
 	}
 
 }
