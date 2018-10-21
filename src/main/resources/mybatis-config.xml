@@ -28,6 +28,8 @@
 		
 		<!-- 开启二级缓存 -->
 		<setting name="cacheEnabled" value="true"/>
+		
+		<setting name="logImpl" value="STDOUT_LOGGING"/>
 	</settings>
 	
 	<!-- 3.typeAliases：别名处理器，可以为我们的java类型起别名，别名不区分大小写 -->
