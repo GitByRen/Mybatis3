@@ -9,7 +9,9 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.important.mp1.beans.Employee;
 import com.important.mp1.mapper.EmployeeMapper;
 
@@ -53,7 +55,7 @@ public class TestSimpleCrud {
 		Employee employee = new Employee();
 		employee.setId(1);
 		employee.setLastName("tom");
-		Employee selectOne = employeeMapper.selectOne(employee);
+		Employee selectOne = employee.selectOne(new QueryWrapper<Employee>(employee));
 		System.out.println("selectOne：" + selectOne);
 
 		// 3.通过多个id进行查询
@@ -68,7 +70,7 @@ public class TestSimpleCrud {
 		System.out.println("selectByMap：" + selectByMap);
 
 		// 5.分页查询，不是真实的分页，sql没有limit
-		List<Employee> selectPage = employeeMapper.selectPage(new Page<>(1, 2), null);
+		IPage<Employee> selectPage = employeeMapper.selectPage(new Page<Employee>(1,2), new QueryWrapper<>());
 		System.out.println("selectPage：" + selectPage);
 	}
 

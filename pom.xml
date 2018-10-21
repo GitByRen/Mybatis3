@@ -9,7 +9,8 @@
 
 	<properties>
 		<com.important.mysql>5.1.46</com.important.mysql>
-		<com.important.log4j>1.2.17</com.important.log4j>
+		<com.important.log4j>2.11.1</com.important.log4j>
+		<com.important.slf4j>1.7.25</com.important.slf4j>
 		<com.important.junit>4.12</com.important.junit>
 		<com.important.mbg>1.3.7</com.important.mbg>
 		<com.important.c3p0>0.9.5.2</com.important.c3p0>
@@ -23,7 +24,7 @@
 		<dependency>
 		    <groupId>com.baomidou</groupId>
 		    <artifactId>mybatis-plus</artifactId>
-		    <version>2.3</version>
+		    <version>3.0.5</version>
 		</dependency>
 		<!-- c3p0 -->
 		<dependency>
@@ -38,9 +39,14 @@
 			<version>${com.important.mysql}</version>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
 			<version>${com.important.log4j}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${com.important.slf4j}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

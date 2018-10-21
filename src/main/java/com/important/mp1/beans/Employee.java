@@ -1,10 +1,10 @@
 package com.important.mp1.beans;
 
-import java.io.Serializable;
-
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 @TableName(value = "tbl_employee")
 public class Employee extends Model<Employee>{
@@ -16,10 +16,10 @@ public class Employee extends Model<Employee>{
 	 * 	value：指定表中的主键列的列名，如果实体属性名和列名一致，可以省略不指定
 	 * 	type：指定主键策略
 	 */
-	// @TableId(value = "id", type = IdType.AUTO)
+	@TableId(value = "id", type = IdType.AUTO)
 	private Integer id;
 	
-	// @TableField(value = "last_name")
+	@TableField(value = "last_name")
 	private String lastName;
 	private String email;
 	private Integer gender;
@@ -80,14 +80,6 @@ public class Employee extends Model<Employee>{
 	public String toString() {
 		return "Employee [id=" + id + ", lastName=" + lastName + ", email=" + email + ", gender=" + gender + ", age="
 				+ age + "]";
-	}
-
-	/**
-	 * 返回主键
-	 */
-	@Override
-	protected Serializable pkVal() {
-		return id;
 	}
 
 }
