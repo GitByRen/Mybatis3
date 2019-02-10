@@ -26,7 +26,7 @@ public interface EmployeeMapper {
 
 	public void addEmp(Employee employee);
 
-	public void updateEmp(Employee employee);
+	public int updateEmp(Employee employee);
 
 	public void deleteEmpById(Integer id);
 }

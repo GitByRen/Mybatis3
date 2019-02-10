@@ -10,6 +10,7 @@
 	异常：
 	org.apache.ibatis.binding.BindingException: 
 	Parameter 'id' not found. 
+	// 可用的参数
 	Available parameters are [1, 0, param1, param2]
 	操作：
 		方法：public Employee getEmpByIdAndLastName(Integer id,String lastName);

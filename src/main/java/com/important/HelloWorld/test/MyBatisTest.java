@@ -28,6 +28,7 @@ public class MyBatisTest {
 	public SqlSessionFactory getSessionFactory() throws IOException {
 		String resources = "mybatis-config.xml";
 		InputStream resourceAsStream = Resources.getResourceAsStream(resources);
+		// 把配置文件的信息解析并保存在Configuration对象中，返回包含了Configuration的DefaultSqlSession对象
 		return new SqlSessionFactoryBuilder().build(resourceAsStream);
 	}
 
@@ -51,7 +52,7 @@ public class MyBatisTest {
 	public void test1() throws IOException {
 		// 1.获取sqlSessionFactory对象
 		SqlSessionFactory sqlSessionFactory = getSessionFactory();
-		// 2.获取sqlSession对象
+		// 2.获取sqlSession对象，返回一个DefaultSqlSession对象，包含Executor和Configuration
 		SqlSession openSession = sqlSessionFactory.openSession();
 		// 3.会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
 		try {
@@ -94,14 +95,16 @@ public class MyBatisTest {
 			EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
 			
 			// 添加
-			Employee employee = new Employee(null, "jerry", "jerry@abc.com", "1");
-			mapper.addEmp(employee);
-			// useGeneratedKeys、keyProperty
-			System.out.println(employee.getId());
+//			Employee employee = new Employee(null, "jerry", "jerry@abc.com", "1");
+//			mapper.addEmp(employee);
+//			// useGeneratedKeys、keyProperty
+//			System.out.println(employee.getId());
 			
 			// 修改
-//			Employee employee = new Employee(1, "jerrys", "jerry@abc.com", "0");
-//			mapper.updateEmp(employee);
+			Employee employee = new Employee(1, "jerrys", "jerry@abc.com", "0");
+			// 自动返回执行条数
+			int updateEmp = mapper.updateEmp(employee);
+			System.out.println(updateEmp);
 			
 			// 删除
 //			mapper.deleteEmpById(2);
